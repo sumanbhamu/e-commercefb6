@@ -6,6 +6,7 @@
 <div class="container" ng-app="myApp" ng-controller="MyController" ng-init="getDataFromServer()">
 
   <form>
+ <!--  Search option -->
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
@@ -14,6 +15,7 @@
     </div>
   </form>
   <table class="table table-hover" style="min-width:1200px">
+  <!--  Table header section -->
    <thead>
       <tr>
       <td>
@@ -53,6 +55,8 @@
         </td>
          </tr>
     </thead>
+    
+    <!-- showing product details -->
      <tbody>
       <tr ng-repeat="p1 in prod | orderBy:sortType:sortReverse | filter:searchPTitle">
            		<td>{{p1.prod_id}}</td>
@@ -66,11 +70,12 @@
         <td><a href="Updateprod&{{p1.id}}">Edit</a></td>  
  
  <td><a href="viewDetail?{{p1.id}}">view</a>   -->     	
+     
       </tr>
     </tbody>
     
   </table>
-  <a href="addProduct"><h1 align="center"><h2><font color="white">Back</a></center>
+  <a href="addproduct"><h1 align="center"><h2><font color="white">Back</a></center>
 </div>
 
 

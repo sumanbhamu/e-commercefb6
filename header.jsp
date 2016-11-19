@@ -39,7 +39,7 @@ function MyController($scope,$http)
 			}).success(function(data,status,headers,config){
 				$scope.prod=data;
 			}).error(function(data,status,headers,config){
-				//called asynchronsoly if an error occurs
+				//called asynchronsoly(simultaneous) if an error occurs
 				//or server returns response with error status
 			});
 				
