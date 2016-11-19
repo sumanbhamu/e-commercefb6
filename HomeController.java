@@ -1,6 +1,7 @@
 package com.suman.Controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,12 @@ import com.suman.ecom.model.User;
 
 @Controller
 public class HomeController {
-	/*
-	 * @Autowired User user;
-	 */
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	User user;
+
 
 	@RequestMapping("/")
 	public String showHome() {
@@ -93,18 +95,23 @@ public class HomeController {
 	 */
 
 	@RequestMapping("/validate")
-	public ModelAndView checkUser(@RequestParam("ema1") String s1, @RequestParam("psd") String s2) {
-		String message;
+	public ModelAndView checkUser(HttpServletRequest request,HttpServletResponse response) {
 		ModelAndView mv;
-		if (s1.equals("suman@gmail.com") && s2.equals("sa")) {
-			message = "valid";
+		String s1,s2;
+		s1=request.getParameter("ema1");
+		s2=request.getParameter("psd");
+		mv=new ModelAndView("/login");
+		System.out.println(s1+"" +s2);
+		user=userDAO.get(s1);
+		System.out.println(user.getEmailid());
+		if (user.getRole().equals("ROLE_ADMIN"))
+		{
 			mv = new ModelAndView("adminhome");
-			mv.addObject("info", message);
-		} else {
-			message = "Entered details are In-valid,Please try again ";
-			mv = new ModelAndView("login");
-			mv.addObject("info", message);
-
+		}
+		else if (user.getRole().equals("ROLE_USER"))
+		{
+			mv = new ModelAndView("index");
+			
 		}
 		return mv;
 	}
